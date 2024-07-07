@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    width: 360px;
+    height: 100vh;
+    background-color: #fdebdd;
+    font-family: "Anek Bangla", sans-serif;
+}
+
+h1{
+    font-size: 1.1rem;
+}
+
+p{
+    font-size: 0.7rem;
+}
+
+
+/* utility */
+
+.container{
+    width: 95vw;
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* main-section */
+.main-container{
+    flex-direction: column;
+    margin: auto;
+    gap: 15px;
+}
+
+.main-container h1{
+    padding-top: 25px;
+}
+
+.footer-pading{
+    padding-bottom: 50px;
+}
+
+
+/* card-section  */
+
