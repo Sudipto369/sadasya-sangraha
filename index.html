@@ -27,7 +27,183 @@
             <img src="assets/hero-img-360px.jpg" alt="photo">
         </div>
     </main>
+<!--Slider section-->
+          .slider-container {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        margin: 50px auto;
+        overflow: hidden;
+      }
 
+      .slider-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .slide {
+        min-width: 100%;
+        height: 500px;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .prev-btn,
+      .next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      .prev-btn:hover,
+      .next-btn:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+
+      .next-btn {
+        right: 0;
+      }
+
+      .dots-container {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 5px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+      }
+
+      .dot.active {
+        background: rgba(255, 255, 255, 0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <div class="slide">
+          <img src="assets/Slider-1.jpeg" alt="Image 1" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-2.jpeg" alt="Image 2" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-3.jpeg" alt="Image 3" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-4.jpeg" alt="Image 4" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-5.jpeg" alt="Image 5" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-6.jpeg" alt="Image 6" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-7.jpeg" alt="Image 7" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-8.jpeg" alt="Image 7" />
+        </div>
+        <div class="slide">
+          <img src="assets/Slider-9.jpeg" alt="Image 7" />
+        </div>
+      </div>
+
+      <button class="prev-btn">❮</button>
+      <button class="next-btn">❯</button>
+
+      <div class="dots-container"></div>
+    </div>
+
+    <script>
+      const sliderWrapper = document.querySelector(".slider-wrapper");
+      const slides = document.querySelectorAll(".slide");
+      const prevBtn = document.querySelector(".prev-btn");
+      const nextBtn = document.querySelector(".next-btn");
+      const dotsContainer = document.querySelector(".dots-container");
+      let currentIndex = 0;
+      let autoPlayInterval;
+
+      // Create dots
+      slides.forEach((_, index) => {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        if (index === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = document.querySelectorAll(".dot");
+
+      function updateSlider() {
+        sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentIndex);
+        });
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateSlider();
+      }
+
+      function goToSlide(index) {
+        currentIndex = index;
+        updateSlider();
+      }
+
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 3000);
+      }
+
+      function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+      }
+
+      // Event listeners
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        stopAutoPlay();
+        startAutoPlay();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        stopAutoPlay();
+        startAutoPlay();
+      });
+
+      // Pause on hover
+      sliderWrapper.addEventListener("mouseenter", stopAutoPlay);
+      sliderWrapper.addEventListener("mouseleave", startAutoPlay);
+
+      // Initialize autoplay
+      startAutoPlay();
+    </script>
 <!-- button-section -->
     <section class="button-section">
         <div class="button-container flex">
